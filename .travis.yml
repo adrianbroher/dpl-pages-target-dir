@@ -1,5 +1,14 @@
 os: linux
 language: shell
+before_install:
+  - >-
+    openssl aes-256-cbc
+    -K $encrypted_218a1edbf156_key
+    -iv $encrypted_218a1edbf156_iv
+    -in .pages-deployment.key.enc
+    -out .pages-deployment.key
+    -d
+  - chmod 600 .pages-deployment.key
 script:
   - mkdir build
   - 'echo "${TRAVIS_BUILD_ID}: ${TRAVIS_COMMIT}" > build/index.html'
@@ -8,6 +17,7 @@ deploy:
     edge:
       source: adrianbroher/dpl
       branch: pages-target-dir
+    deploy_key: .pages-deployment.key
     local_dir: build
     target_dir: subdir
     committer_from_gh: true
