@@ -20,5 +20,4 @@ deploy:
     deploy_key: .pages-deployment.key
     local_dir: build
     target_dir: subdir
-    committer_from_gh: true
     verbose: true
