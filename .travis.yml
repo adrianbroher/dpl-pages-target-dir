@@ -1,0 +1,14 @@
+os: linux
+language: shell
+script:
+  - mkdir build
+  - 'echo "${TRAVIS_BUILD_ID}: ${TRAVIS_COMMIT}" > build/index.html'
+deploy:
+  - provider: pages
+    edge:
+      source: adrianbroher/dpl
+      branch: pages-target-dir
+    local_dir: build
+    target_dir: subdir
+    committer_from_gh: true
+    verbose: true
